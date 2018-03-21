@@ -176,7 +176,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 				$( "#keyword" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
-			          url: "api.php",
+			          url: "http://www.adfreetorrents.com/api.php",
 			          dataType: "jsonp",
 			          data: {
 			            term: request.term
@@ -233,7 +233,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 					// $("#keyword").val('');
 
 					$.ajax({
-						url : 'getResult.php',
+						url : 'http://www.adfreetorrents.com/getResult.php',
 						data : { 'keyword': keyword, 'orderBy':orderBy, 'page':page },
 						method : 'post',
 						success : function(data)
