@@ -117,7 +117,7 @@ class API
 		if( $keyword == 'browse' )
 		{
 			// $url = "https://thepiratebay.org/" . urlencode($keyword) . "/200/" . $page . "/".$order."/0/";
-			$url = 'https://thepiratebay.org/recent';
+			$url = 'https://thepiratebay.org/top/201';
 		}
 		else
 		{

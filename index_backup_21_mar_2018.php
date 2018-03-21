@@ -1,16 +1,10 @@
-<?php 
-
-$keyword = empty($_REQUEST['keyword']) ? 'browse' : $_REQUEST['keyword'];
-$orderBy = empty($_POST['orderBy']) ? 'Name' : $_POST['orderBy'];
-$page = empty($_POST['page']) ? 1 : $_POST['page'];
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>AdFreeTorrent | Seach Torrents without worrying about popup ads</title>
+		<title>New AdFreeTorrent | Seach Torrents without worrying about popup ads</title>
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="google-site-verification" content="nd-C4tRQn0qlM8mpUma3GdZhk23xu5ObaXxuIc08ruU" />
 	    <meta name="description" content="Search dozens of torrent without worry about popup ads. Enjoy downloading ad free torrents. Download music, movies, games, software and much more. The ad free torrent is the world's best BitTorrent site.">
 	    <meta name="keywords" content="adfreetorrents.com, get rid of ads,movies torrent, torrent movie download , popup ads,stop ads, ad remover, stop google ads, ad free, no popups,mp3, avi, bittorrent, torrent, torrents, movies, music, games, applications, apps, download, upload, share, kopimi, magnets, magnet">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +14,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<!-- Optional theme -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link lazyload="1" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+		<script type="text/javascript" src="node_modules/webtorrent/webtorrent.min.js"></script>
 		<style type="text/css">
 		.jumbotron p{
 			font-size: 15px !important;
@@ -41,102 +35,14 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
             <div>
             	<h2 align="center">Ad Free Torrents</h2>
                 <div class="input-group">                	
-                    <input id="keyword" value="<?php echo ($keyword != 'browse') ? $keyword : ''; ?>" name="keyword" type="text" class="form-control" placeholder="ad free torrents search">
+                    <input id="keyword" name="keyword" type="text" class="form-control">
                     <span class="input-group-btn">
                         <button id="search" class="btn btn-primary btn-flat" type="button"><span class="glyphicon glyphicon-search"></span></button>
                     </span>
                 </div>
             </div>
 
-            <div id="result_container">
-			<?php
-			require_once "API.php";
-			$tpbObj = new \TPB\API();
-
-			function microtime_float()
-			{
-			    list($usec, $sec) = explode(" ", microtime());
-			    return ((float)$usec + (float)$sec);
-			}
-
-			$time_start = microtime_float();
-			$searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
-
-			if( count($searchResults) > 0 )
-			{
-				$pageCount = empty($searchResults[0]->PageCount) ? 0 : $searchResults[0]->PageCount;	
-			}
-			else
-			{
-				$pageCount = 0;
-			}
-
-			$time_end = microtime_float();
-			$time = $time_end - $time_start;
-
-			echo '<p class="search-result-status" style="padding-top: 10px;padding-left: 2px;">About '.(number_format($pageCount)).' results ('.(@number_format($time, 2)).' seconds)</p>';
-			if( $keyword != 'browse' )
-				{
-					echo '<div class="row"> 
-							<div class="col-md-12" style="text-align: center;">
-								Order by : <div class="btn-group" role="group" aria-label="Order by">';
-								echo '<button type="button" class="btn btn-default '.(($orderBy=='Name') ? 'active' : '').'" data-value="Name">Name</button>';
-								echo '<button type="button" class="btn btn-default '.(($orderBy=='Uploaded') ? 'active' : '').'" data-value="Uploaded">Uploaded</button>';
-								echo '<button type="button" class="btn btn-default '.(($orderBy=='Size') ? 'active' : '').'" data-value="Size">Size</button>';
-								echo '<button type="button" class="btn btn-default '.(($orderBy=='Seeders') ? 'active' : '').'" data-value="Seeders">Seeders</button>';
-								// echo '<button type="button" class="btn btn-default '.(($orderBy=='Leaders') ? 'active' : '').'" data-value="Leaders">Leaders</button>';
-								echo '</div>
-							</div>
-						</div>';
-
-				
-					echo '<div class="row"> 
-						<div class="col-md-12" style="text-align: center;">
-							<ul class="pagination styled-square"><li class="prev"><a href="#">« PREV</a></li>';
-
-						if(count($searchResults) == 0)
-						{
-							$attr = 'data-value=0';
-						}
-						else
-						{
-							$attr = 'data-value=100';
-						}
-
-					    echo '<li class="next" '.$attr.'><a href="#">NEXT »</a></li>
-								</ul>
-								<p style="font-weight : bold">Page '.$page.'</p>
-								<input type="hidden" id="hidPageCount" value="'.$page.'" />
-							</div>
-						</div>';					
-				}
-				else
-				{
-					echo '<h4 align="center"> ---- Top 100 ----</h4>';
-				}
-
-			if( count($searchResults) > 0 )
-			{
-				foreach ($searchResults as $result) 
-				{
-					echo '<div class="list-group-item">';
-					echo '<h4 class="list-group-item-heading"><a href="'.$result->Magnet.'" style="    word-break: break-word;">'.$result->Title.'</a></h4>';
-					echo '<p class="list-group-item-text">
-							<a href="'.$result->Magnet.'" class="search-result-link" style="font-weight: bold;color: green;">Download : <span class="glyphicon glyphicon-magnet"></span></a>&nbsp;&nbsp;</a>
-							<span style="font-weight: bold">Size : </span>'.$result->Size.'&nbsp;&nbsp;
-							<span style="font-weight: bold">Seeders : </span>'.$result->Seeders.'&nbsp;&nbsp;
-							<span style="font-weight: bold">Leeders : </span>'.$result->Leechers.'&nbsp;&nbsp;
-							<span style="font-weight: bold">Uploaded : </span>'.$result->Uploaded.'&nbsp;&nbsp;
-						  </p>';	
-					echo '</div>';
-				}
-			}
-			else
-			{
-				echo '<br><div class="row"><div role="alert" class="col-md-12 alert alert-danger" style="text-align:center">No Results Found</div></div>';
-			}
-			?>
-			</div>
+            <div id="result_container"><input type="hidden" id="hidPageCount" value="0" /></div>
             <br>
             <div class="row">
             	<div class="col-md-12" style="text-align:center">
@@ -155,11 +61,13 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-		<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 		<script type="text/javascript">
 			$(document).ready(function(){
 
 				// $('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').closest('div').hide();
+
 				$( "#keyword" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
@@ -196,9 +104,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		   
 		   		$("#search").click(function()
 				{
-					// getResult(1);
-					var keyword = $("#keyword").val();
-					window.location = 'index.php?keyword='+keyword;
+					getResult(1);
 				});				
 
 				getResult = function(page)
@@ -215,7 +121,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 					$("#fade").show();
 					$("#loading").show();
 
-					// $("#keyword").val('');
+					$("#keyword").val('');
 
 					$.ajax({
 						url : 'getResult.php',
@@ -289,6 +195,44 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		  ga('create', 'UA-26827253-2', 'auto');
 		  ga('send', 'pageview');
 
+		</script>
+		<script type="application/ld+json">
+
+		{
+
+		"@context": "http://schema.org",
+
+		"@type": "WebSite",
+
+		"url": "http://www.adfreetorrents.com/",
+
+		"potentialAction": {
+
+			"@type": "SearchAction",
+
+			"target": "http://www.adfreetorrents.com/search.php?keyword={search_term_string}",
+
+			"query-input": "required name=search_term_string"
+
+			}
+
+		}
+
+	  </script>
+
+	  <script type="application/ld+json">
+		{
+		  "@context": "http://schema.org",
+		  "@type": "Organization",
+		  "url": "http://www.adfreetorrents.com/",
+		  "name": "Any suggestions?",
+		  "contactPoint": {
+		    "@type": "ContactPoint",
+		    "email": "info@adfreetorrents.com",
+		    "telephone": "+91 8087713055",
+		    "contactType": "customer support"
+		  }
+		}
 		</script>
 	</body>
 </html>

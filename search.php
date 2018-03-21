@@ -1,7 +1,7 @@
 <?php 
 
 $keyword = empty($_REQUEST['keyword']) ? 'browse' : $_REQUEST['keyword'];
-$orderBy = empty($_POST['orderBy']) ? 'Seeders' : $_POST['orderBy'];
+$orderBy = empty($_POST['orderBy']) ? 'Name' : $_POST['orderBy'];
 $page = empty($_POST['page']) ? 1 : $_POST['page'];
 
 ?>
@@ -60,14 +60,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 			}
 
 			$time_start = microtime_float();
-
-			
-
-			// echo "<pre>"; print_r($_POST); die();
-
 			$searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
-
-			// echo "<pre>"; print_r($searchResults); die();
 
 			if( count($searchResults) > 0 )
 			{
@@ -95,22 +88,9 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 					</div>
 				</div>';
 
-			// echo "<pre>"; print_r($pageCount); die();
-
-
 				echo '<div class="row"> 
 					<div class="col-md-12" style="text-align: center;">
 						<ul class="pagination styled-square"><li class="prev"><a href="#">« PREV</a></li>';
-
-				// $pages = ceil( $pageCount / 29 );
-
-				// echo "<pre>"; print_r($pages); die();
-
-				// for ($i=1; $i <= $pages; $i++) 
-				// { 
-
-				// 	echo '<li class="'.( ($i == $page) ? 'active' : '').'"><a href="#">'.$i.'</a></li>';
-				// }                
 
 					if(count($searchResults) == 0)
 					{
@@ -136,7 +116,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 				foreach ($searchResults as $result) 
 				{
 					echo '<div class="list-group-item">';
-					echo '<h4 class="list-group-item-heading"><a href="javascript:;" style="    word-break: break-word;">'.$result->Title.'</a></h4>';
+					echo '<h4 class="list-group-item-heading"><a href="'.$result->Magnet.'" style="    word-break: break-word;">'.$result->Title.'</a></h4>';
 					// echo '<p class="list-group-item-text"></p>';	
 					echo '<p class="list-group-item-text">
 							<a href="'.$result->Magnet.'" class="search-result-link" style="font-weight: bold;color: green;">Download : <span class="glyphicon glyphicon-magnet"></span></a>&nbsp;&nbsp;</a>
@@ -177,7 +157,6 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 			$(document).ready(function(){
 
 				// $('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').closest('div').hide();
-
 				$( "#keyword" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
@@ -214,7 +193,9 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		   
 		   		$("#search").click(function()
 				{
-					getResult(1);
+					// getResult(1);
+					var keyword = $("#keyword").val();
+					window.location = 'search.php?keyword='+keyword;
 				});				
 
 				getResult = function(page)
