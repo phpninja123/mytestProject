@@ -1,5 +1,5 @@
 <?php 
-
+//print_r($_GET); die();
 $keyword = empty($_REQUEST['keyword']) ? 'browse' : $_REQUEST['keyword'];
 $orderBy = empty($_POST['orderBy']) ? 'Name' : $_POST['orderBy'];
 $page = empty($_POST['page']) ? 1 : $_POST['page'];
@@ -198,7 +198,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 				{
 					// getResult(1);
 					var keyword = $("#keyword").val();
-					window.location = 'index.php?keyword='+keyword;
+					window.location = '/searchTorrent/'+keyword;
 				});				
 
 				getResult = function(page)
