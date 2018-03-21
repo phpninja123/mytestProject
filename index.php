@@ -21,6 +21,14 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link lazyload="1" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+		<!-- Include Twitter Bootstrap and jQuery: -->
+		<!-- <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/> -->
+		<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
+		<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+		 
+		<!-- Include the plugin's CSS and JS: -->
+		<link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+
 		<style type="text/css">
 		.jumbotron p{
 			font-size: 15px !important;
@@ -40,7 +48,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<div class="panel-body" >
             <div>
             	<h2 align="center">Ad Free Torrents</h2>
-                <div class="input-group">                	
+                <div class="input-group">
                     <input id="keyword" value="<?php echo ($keyword != 'browse') ? $keyword : ''; ?>" name="keyword" type="text" class="form-control" placeholder="ad free torrents search">
                     <span class="input-group-btn">
                         <button id="search" class="btn btn-primary btn-flat" type="button"><span class="glyphicon glyphicon-search"></span></button>
@@ -151,12 +159,17 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 	     </div>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+		<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+		
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script type="text/javascript">
+			$(document).ready(function() {
+		        $('#example-getting-started').multiselect();
+		    });
 			$(document).ready(function(){
 
 				// $('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').closest('div').hide();
@@ -189,7 +202,9 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 				$('#keyword').on("keypress", function(e) {
 		            /* ENTER PRESSED*/
 		            if (e.keyCode == 13) {
-		                getResult(1);
+		                // getResult(1);
+		                var keyword = $("#keyword").val();
+						window.location = '/searchTorrent/'+keyword;
 		            }
 		        });
 
