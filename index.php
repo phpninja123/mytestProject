@@ -16,7 +16,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Latest compiled and minified CSS -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link lazyload="1" rel="stylesheet" type="text/css" href="css/new_loader.css">
+		<link lazyload="1" rel="stylesheet" type="text/css" href="http://www.adfreetorrents.com/css/new_loader.css">
 		<!-- Optional theme -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link lazyload="1" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
