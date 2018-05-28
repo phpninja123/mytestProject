@@ -1,5 +1,4 @@
 <?php 
-//print_r($_GET); die();
 $keyword = empty($_REQUEST['keyword']) ? 'browse' : $_REQUEST['keyword'];
 $orderBy = empty($_POST['orderBy']) ? 'Name' : $_POST['orderBy'];
 $page = empty($_POST['page']) ? 1 : $_POST['page'];
@@ -16,7 +15,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Latest compiled and minified CSS -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link lazyload="1" rel="stylesheet" type="text/css" href="http://www.adfreetorrents.com/css/new_loader.css">
+		<link lazyload="1" rel="stylesheet" type="text/css" href="<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/css/new_loader.css">
 		<!-- Optional theme -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link lazyload="1" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -39,7 +38,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 			display: none;
 		}
 
-		.ui-autocomplete-loading { background:url('images/ui-anim_basic_16x16.gif') no-repeat right center }
+		.ui-autocomplete-loading { background:url('http://www.adfreetorrents.com/images/ui-anim_basic_16x16.gif') no-repeat right center }
 
 		</style>
 	</head>
@@ -69,7 +68,6 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 
 			$time_start = microtime_float();
 			$searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
-
 			if( count($searchResults) > 0 )
 			{
 				$pageCount = empty($searchResults[0]->PageCount) ? 0 : $searchResults[0]->PageCount;	
@@ -176,7 +174,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 				$( "#keyword" ).autocomplete({
 			      source: function( request, response ) {
 			        $.ajax( {
-			          url: "http://www.adfreetorrents.com/api.php",
+			          url: "<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/api.php",
 			          dataType: "jsonp",
 			          data: {
 			            term: request.term
@@ -204,7 +202,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		            if (e.keyCode == 13) {
 		                // getResult(1);
 		                var keyword = $("#keyword").val();
-						window.location = '/searchTorrent/'+keyword;
+						window.location = '/searchTorrent/'+encodeURI(keyword);
 		            }
 		        });
 
@@ -233,7 +231,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 					// $("#keyword").val('');
 
 					$.ajax({
-						url : 'http://www.adfreetorrents.com/getResult.php',
+						url : '<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/getResult.php',
 						data : { 'keyword': keyword, 'orderBy':orderBy, 'page':page },
 						method : 'post',
 						success : function(data)

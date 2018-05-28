@@ -124,9 +124,7 @@ class API
 		{
 			$url = "https://thepiratebay.org/search/" . urlencode($keyword) . "/" . $page . "/".$order."/0/";	
 		}
-		// echo "<pre>"; print_r($url); die();
 		$getResults = $this->getPage($url);
-		// echo "<pre>"; print_r($getResults); die();
 		$results = array();
 		
 		preg_match_all('/<div align="center">(.*?)<\/div>/si', $getResults, $pages);

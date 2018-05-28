@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^/?searchTorrent/([^/d]+)/?$ index.php?keyword=$1 [QSA]
+RewriteRule ^/?searchTorrent/([^/.*]+)/?$ index.php?keyword=$1 [QSA]

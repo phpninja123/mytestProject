@@ -18,8 +18,6 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 
 $searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
 
-// echo "<pre>"; print_r($searchResults); die();
-
 if( count($searchResults) > 0 )
 {
 	$pageCount = empty($searchResults[0]->PageCount) ? 0 : $searchResults[0]->PageCount;	
