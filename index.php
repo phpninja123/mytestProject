@@ -10,6 +10,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<title>AdFreeTorrent | Seach Torrents without worrying about popup ads</title>
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="google-site-verification" content="nd-C4tRQn0qlM8mpUma3GdZhk23xu5ObaXxuIc08ruU" />
 	    <meta name="description" content="Search dozens of torrent without worry about popup ads. Enjoy downloading ad free torrents. Download music, movies, games, software and much more. The ad free torrent is the world's best BitTorrent site.">
 	    <meta name="keywords" content="adfreetorrents.com, get rid of ads,movies torrent, torrent movie download , popup ads,stop ads, ad remover, stop google ads, ad free, no popups,mp3, avi, bittorrent, torrent, torrents, movies, music, games, applications, apps, download, upload, share, kopimi, magnets, magnet">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
