@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: api.php
+Disallow: API.php
+Disallow: custom_search.php
+Disallow: default.php
+Disallow: getResult.php
+Disallow: index_backup_21_mar_2018.php
+
