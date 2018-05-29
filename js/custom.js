@@ -20,7 +20,8 @@ $(document).ready(function(){
       minLength: 2,
       select: function( event, ui ) {
         $("#keyword").val(ui.item.value);
-        getResult(1);
+        window.location = '/searchTorrent/'+encodeURI(ui.item.value);
+        // getResult(1);
       },
       close: function( event, ui ) {
       	// getResult(1);
