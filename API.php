@@ -135,30 +135,6 @@ class API
 
 		$pageCount = count($matches[0]);
 
-		// if( !empty(trim($pages[1][0])) )
-		// {
-		// 	$pages = $pages[0][0];
-		// 	// echo "<pre>"; print_r($pages); die();
-		// 	$pageNumbers = explode('</a>', $pages);
-		// 	$pageNumbers = $pageNumbers[count($pageNumbers)-3];
-		// 	// echo "<pre>"; print_r("<input type='text' value='".$pageNumbers."' />"); die();
-		// 	$pageNumbers = explode('">',$pageNumbers);
-		// 	$pageCount = $pageNumbers[1];
-		// }
-		// else if( count($matches) > 0 )
-		// {
-		// 	$pageCount = 1;	
-		// }
-		// else
-		// {
-		// 	$pageCount = 0;
-		// }
-		
-		// echo "<pre>"; print_r($pageCount); die();
-		// echo "<pre>"; print_r("<input type='text' value='".$pageNumbers[1]."' />"); die();
-		// echo "<pre>"; print_r($pageNumbers); die();
-		//preg_match_all('/<div class="detName">(.*?)<\/td>/si', $getResults, $matches);
-		
 		foreach ($matches[1] as $result) {
 			preg_match('/<a href="\/torrent\/(\d+)\//si', $result, $rMatches);
 			$torrentID = $rMatches[1];

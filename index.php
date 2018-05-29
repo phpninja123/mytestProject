@@ -13,6 +13,22 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 	    <meta name="google-site-verification" content="nd-C4tRQn0qlM8mpUma3GdZhk23xu5ObaXxuIc08ruU" />
 	    <meta name="description" content="Search dozens of torrent without worry about popup ads. Enjoy downloading ad free torrents. Download music, movies, games, software and much more. The ad free torrent is the world's best BitTorrent site.">
 	    <meta name="keywords" content="adfreetorrents.com, get rid of ads,movies torrent, torrent movie download , popup ads,stop ads, ad remover, stop google ads, ad free, no popups,mp3, avi, bittorrent, torrent, torrents, movies, music, games, applications, apps, download, upload, share, kopimi, magnets, magnet">
+	    <meta property="og:image" content="https://www.adfreetorrents.com/icon.png" />
+		<meta property="og:ttl" content="600" />
+		<meta property="og:site_name" content="Ad Free Torrents" />
+		<link rel="apple-touch-icon" sizes="57x57" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="60x60" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="76x76" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="120x120" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="152x152" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="icon" type="image/png" sizes="96x96" href="//www.adfreetorrents.com/icon.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="//www.adfreetorrents.com/icon.png" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Latest compiled and minified CSS -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -20,34 +36,13 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<!-- Optional theme -->
 		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link lazyload="1" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-		<!-- Include Twitter Bootstrap and jQuery: -->
-		<!-- <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/> -->
-		<!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
-		<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
-		 
-		<!-- Include the plugin's CSS and JS: -->
-		<!-- <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/> -->
-
-		<style type="text/css">
-		.jumbotron p{
-			font-size: 15px !important;
-		}
-
-		a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]
-		{
-			display: none;
-		}
-
-		.ui-autocomplete-loading { background:url('http://www.adfreetorrents.com/images/ui-anim_basic_16x16.gif') no-repeat right center }
-
-		</style>
 	</head>
-	<body class="jumbotron" style="padding-top: 25px;padding-bottom: 25px;">
-		
+	<body class="jumbotron" style="padding-top: 25px;padding-bottom: 25px;">		
 		<div class="panel-body" >
             <div>
-            	<h2 align="center">Ad Free Torrents</h2>
+            	<h2 align="center">
+            		<a href="/"><img src="/images/new.png" alt="Ad Free Torrents"></a>
+            	</h2>
                 <div class="input-group">
                     <input id="keyword" value="<?php echo ($keyword != 'browse') ? $keyword : ''; ?>" name="keyword" type="text" class="form-control" placeholder="ad free torrents search">
                     <span class="input-group-btn">
@@ -165,135 +160,7 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<!-- <script type="text/javascript" src="js/bootstrap-multiselect.js"></script> -->
 		
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-		        // $('#example-getting-started').multiselect();
-		    });
-			$(document).ready(function(){
-
-				// $('a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]').closest('div').hide();
-				$( "#keyword" ).autocomplete({
-			      source: function( request, response ) {
-			        $.ajax( {
-			          url: "<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/api.php",
-			          dataType: "jsonp",
-			          data: {
-			            term: request.term
-			          },
-			          success: function( data ) {
-			            response( data );
-			          }
-			        } );
-			      },
-			      minLength: 2,
-			      select: function( event, ui ) {
-			        $("#keyword").val(ui.item.value);
-			        getResult(1);
-			      },
-			      close: function( event, ui ) {
-			      	// getResult(1);
-			      }, 
-
-			      search  : function(){$(this).addClass('ui-autocomplete-loading');},
-				  open    : function(){$(this).removeClass('ui-autocomplete-loading');}
-			    } );
-
-				$('#keyword').on("keypress", function(e) {
-		            /* ENTER PRESSED*/
-		            if (e.keyCode == 13) {
-		                // getResult(1);
-		                var keyword = $("#keyword").val();
-						window.location = '/searchTorrent/'+encodeURI(keyword);
-		            }
-		        });
-
-		   
-		   		$("#search").click(function()
-				{
-					// getResult(1);
-					var keyword = $("#keyword").val();
-					window.location = '/searchTorrent/'+keyword;
-				});				
-
-				getResult = function(page)
-				{
-					var orderBy = $('.btn-group button.active').data('value');					
-					var keyword = $("#keyword").val();
-
-					if( keyword == '' )
-					{
-						alert("Keyword cannot be blank");
-						return false;
-					}
-
-					$("#fade").show();
-					$("#loading").show();
-
-					// $("#keyword").val('');
-
-					$.ajax({
-						url : '<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/getResult.php',
-						data : { 'keyword': keyword, 'orderBy':orderBy, 'page':page },
-						method : 'post',
-						success : function(data)
-						{
-							$("#fade").hide();
-							$("#loading").hide();
-							$("#result_container").html(data);
-							$("#keyword").val(keyword);
-						}
-					});
-				}
-
-				$(document).on('click', ".btn-group button", function()
-				{
-					$('.btn-group button').each(function(index, item){
-						$(item).removeClass('active');
-					});
-
-					if( $(this).hasClass('active') )
-					{
-						$(this).removeClass('active');	
-					}
-					else
-					{
-						$(this).addClass('active');
-					}
-
-					getResult();
-				});
-
-				$(document).on('click', ".next", function()
-				{					
-					var nextCount = $(this).data('value');
-					var page = parseInt($("#hidPageCount").val());
-					page++;	
-
-					if( nextCount != 0 )
-					{
-						getResult(page);	
-					}										
-					
-				});
-
-				$(document).on('click', ".prev", function()
-				{
-					var page = parseInt($("#hidPageCount").val());
-
-					if(page == 1)
-					{
-						return false;
-					}
-					else{ 
-						page--;
-					}
-
-					getResult(page);	
-										
-				});
-				
-			});
-		</script>
+		<script type="text/javascript" src="/js/custom.js"></script>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

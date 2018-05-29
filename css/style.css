@@ -1,0 +1,10 @@
+.jumbotron p{
+	font-size: 15px !important;
+}
+
+a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]
+{
+	display: none;
+}
+
+.ui-autocomplete-loading { background:url('http://www.adfreetorrents.com/images/ui-anim_basic_16x16.gif') no-repeat right center }
