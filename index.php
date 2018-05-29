@@ -4,11 +4,28 @@ $orderBy = empty($_POST['orderBy']) ? 'Name' : $_POST['orderBy'];
 $page = empty($_POST['page']) ? 1 : $_POST['page'];
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html amp lang="en">
 	<head>
-		<title>AdFreeTorrent | Seach Torrents without worrying about popup ads</title>
+		<script async src="https://cdn.ampproject.org/v0.js"></script>
 		<meta charset="utf-8">
+		<title>AdFreeTorrent | Seach Torrents without worrying about popup ads</title>
+		<link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+	    <meta name="viewport" content="minimum-scale=1, width=device-width, initial-scale=1">
+
+	    <script type="application/ld+json">
+	      {
+	        "@context": "http://schema.org",
+	        "@type": "NewsArticle",
+	        "headline": "Open-source framework for publishing content",
+	        "datePublished": "2015-10-07T12:02:41Z",
+	        "image": [
+	          "logo.jpg"
+	        ]
+	      }
+	    </script>
+	    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="google-site-verification" content="nd-C4tRQn0qlM8mpUma3GdZhk23xu5ObaXxuIc08ruU" />
 	    <meta name="description" content="Search dozens of torrent without worry about popup ads. Enjoy downloading ad free torrents. Download music, movies, games, software and much more. The ad free torrent is the world's best BitTorrent site.">
@@ -29,19 +46,24 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<link rel="icon" type="image/png" sizes="32x32" href="//www.adfreetorrents.com/icon.png" />
 		<link rel="icon" type="image/png" sizes="96x96" href="//www.adfreetorrents.com/icon.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="//www.adfreetorrents.com/icon.png" />
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Latest compiled and minified CSS -->
-		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link lazyload="1" rel="stylesheet" type="text/css" href="<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/css/new_loader.css">
+	    <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="<?php echo 'http://'.$_SERVER['HTTP_HOST']; ?>/css/new_loader.css">
 		<!-- Optional theme -->
-		<link lazyload="1" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		<link lazyload="1" rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" crossorigin="anonymous">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<style amp-custom>
+      /* any custom styles go here. */
+      body {
+        background-color: white;
+      }      
+    </style>
 	</head>
 	<body class="jumbotron" style="padding-top: 25px;padding-bottom: 25px;">		
 		<div class="panel-body" >
             <div>
             	<h2 align="center">
-            		<a href="/"><img src="/images/new.png" alt="Ad Free Torrents"></a>
+            		<a href="/"><amp-img width="250" height="194" max-width="250" src="/images/new.png" alt="Ad Free Torrents"></amp-img></a>
             	</h2>
                 <div class="input-group">
                     <input id="keyword" value="<?php echo ($keyword != 'browse') ? $keyword : ''; ?>" name="keyword" type="text" class="form-control" placeholder="ad free torrents search">
