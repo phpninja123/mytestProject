@@ -193,5 +193,12 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		  ga('send', 'pageview');
 
 		</script>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		  (adsbygoogle = window.adsbygoogle || []).push({
+		    google_ad_client: "ca-pub-9765983617300968",
+		    enable_page_level_ads: true
+		  });
+		</script>
 	</body>
 </html>
