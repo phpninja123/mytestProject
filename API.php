@@ -24,7 +24,7 @@
  */
 
 namespace TPB;
-
+require __DIR__ . '/vendor/autoload.php';
 class API
 {
 
@@ -124,14 +124,21 @@ class API
 		{
 			$url = "https://thepiratebay.org/search/" . urlencode($keyword) . "/" . $page . "/".$order."/0/";	
 		}
-		$getResults = $this->getPage($url);
+		
+		$attempt = 0;
+		while( $attempt < 3  ){
+			$getResults = $this->getPage($url);
+			if( $getResults != "" ){
+				break;
+			}
+			$attempt++;
+			
+		}
 		$results = array();
 		
 		preg_match_all('/<div align="center">(.*?)<\/div>/si', $getResults, $pages);
 		
 		preg_match_all('/<td class="vertTh">(.*?)<\/tr>/si', $getResults, $matches);
-
-		// echo "<pre>"; print_r(count($matches[0])); die();
 
 		$pageCount = count($matches[0]);
 
@@ -214,15 +221,24 @@ class API
 	
 	
 	private function getPage($url) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36');
-		$data = curl_exec($ch);
-		curl_close($ch);
+		$client = new \GuzzleHttp\Client();
+		$res = $client->request('GET', $url);
+		// echo $res->getStatusCode();
+		// 200
+		// echo $res->getHeaderLine('content-type');
+		// 'application/json; charset=utf8'
+		$data = $res->getBody();
+		// echo "<pre>"; print_r('+++++++++++++++++++++'); die();
+		// $ch = curl_init();
+		// curl_setopt($ch, CURLOPT_URL, $url);
+		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		// curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36');
+		// $data = curl_exec($ch);
+		// curl_close($ch);
+		// $data = @file_get_contents($url);
 		return $data;
 	}
 }
