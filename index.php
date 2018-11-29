@@ -10,10 +10,10 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 		<script async src="https://cdn.ampproject.org/v0.js"></script>
 		<meta charset="utf-8">
 		<title>AdFreeTorrent | Seach Torrents without worrying about popup ads</title>
-		<link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+		<!-- <link rel="canonical" href="http://example.ampproject.org/article-metadata.html"> -->
 	    <meta name="viewport" content="minimum-scale=1, width=device-width, initial-scale=1">
 
-	    <script type="application/ld+json">
+	    <!-- <script type="application/ld+json">
 	      {
 	        "@context": "http://schema.org",
 	        "@type": "NewsArticle",
@@ -23,8 +23,8 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 	          "logo.jpg"
 	        ]
 	      }
-	    </script>
-	    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	    </script> -->
+	    <!-- <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript> -->
 
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="google-site-verification" content="nd-C4tRQn0qlM8mpUma3GdZhk23xu5ObaXxuIc08ruU" />
@@ -85,7 +85,16 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 			}
 
 			$time_start = microtime_float();
-			$searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
+			$attempt = 0;
+			while($attempt != 3){
+				$searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
+				if( count($searchResults) == 0 ){
+					$searchResults = $tpbObj->searchByTitle($keyword, $orderBy, $page);
+				} else {
+					break;
+				}
+				$attempt++;				
+			}
 			if( count($searchResults) > 0 )
 			{
 				$pageCount = empty($searchResults[0]->PageCount) ? 0 : $searchResults[0]->PageCount;	
@@ -138,7 +147,6 @@ $page = empty($_POST['page']) ? 1 : $_POST['page'];
 				{
 					echo '<h4 align="center"> ---- Top 100 ----</h4>';
 				}
-
 			if( count($searchResults) > 0 )
 			{
 				foreach ($searchResults as $result) 
